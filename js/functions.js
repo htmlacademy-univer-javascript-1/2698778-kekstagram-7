@@ -1,17 +1,15 @@
-const checkLength = (string, maxLength) => string.length <= maxLength;
-checkLength('abcdefghi', 10);
+const isMeetingInWorkTime = (workStart, workEnd, meetingStart, meetingDuration) => {
+  const parseToMinutes = (time) => {
+    const [hours, minutes] = time.split(':').map(Number);
 
-const isPalindrom = (string) => {
-  const normalString = string.replaceAll(/\s/g, '').toLowerCase();
-  const reversedString = normalString.split().reverse().join('');
+    return hours * 60 + minutes;
+  };
 
-  return normalString === reversedString;
+  const workStartMinutes = parseToMinutes(workStart);
+  const workEndMinutes = parseToMinutes(workEnd);
+  const meetingStartMinutes = parseToMinutes(meetingStart);
+  const meetingEndMinutes = meetingStartMinutes + meetingDuration;
+
+  return meetingStartMinutes >= workStartMinutes && meetingEndMinutes <= workEndMinutes;
 };
-isPalindrom('топот');
-
-const getDigits = (string) => {
-  const digits = string.toString().replaceAll(/\D/g, '');
-
-  return digits === '' ? NaN : Number(digits);
-};
-getDigits('2023 год');
+isMeetingInWorkTime('08:00', '17:30', '14:00', 90);  // true
