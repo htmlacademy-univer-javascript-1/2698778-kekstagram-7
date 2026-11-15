@@ -46,7 +46,7 @@ const renderCommentsPortion = () => {
   socialComments.append(fragment);
 
   shownCommentsCount = Math.min(shownCommentsCount + COMMENTS_PORTION, currentComments.length);
-  commentCount.textContent = shownCommentsCount;
+  commentCount.textContent = `${shownCommentsCount} из ${currentComments.length} комментариев`;
 
   if (shownCommentsCount >= currentComments.length) {
     commentsLoader.classList.add('hidden');
